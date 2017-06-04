@@ -14,7 +14,7 @@ def get_first_word(name):
             break
     return new_name
 
-def get_countries(filename):
+def get_countries(filename,year):
     cc_population = {}
     err_country = []
     with open(filename) as f:
@@ -22,7 +22,7 @@ def get_countries(filename):
     err_pop = []
     key = True
     for pop_dict in pop_data:
-        if pop_dict['Year'] == '2014':
+        if pop_dict['Year'] == str(year):
             country_name = pop_dict['Country Name']
             population = int(float(pop_dict['Value']))
             code = get_country_code(country_name)
@@ -55,13 +55,13 @@ def get_countries(filename):
 
     return cc_population
 
-def get_cm_countries(filename):
+def get_cm_countries(filename,year):
     cm_countries = {}
     with open(filename) as f:
         pop_data = json.load(f)
     key = True
     for pop_dict in pop_data:
-        if pop_dict['Year'] == '2014':
+        if pop_dict['Year'] == str(year):
             country_name = pop_dict['Country Name']
             value = int(float(pop_dict['Value']))
             code = get_country_code(country_name)
